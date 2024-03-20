@@ -1,6 +1,6 @@
 +++
 title = "Maximum nonzero contiguous square submatrix"
-description = "Showcasing two dynamic programming tactics to solve a competitive programming problem."
+description = "Combining summed-area tables and another dynamic programming pattern to solve a competitive programming problem."
 date = 2023-03-20
 
 [taxonomies]
@@ -15,7 +15,7 @@ series = "Algorithms"
 +++
 
 
-This post shows how to combine two *DP* ([dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming)) patterns (using a summed-area table, and taking advantage of a constraint in the problem statement) to solve a competitive programming problem in $\mathcal{O}(MN)$ time.
+This post shows how to combine two *DP* ([dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming)) patterns—using a summed-area table, and taking advantage of a constraint in the problem statement—to solve a competitive programming problem in $\mathcal{O}(MN)$ time.
 
 
 <!-- more -->

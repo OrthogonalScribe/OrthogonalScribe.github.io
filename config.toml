@@ -51,6 +51,7 @@ render_emoji = false
 menu = [
     #{url = "blog", name = "Blog", slash = true, blank = false, size="s110"},
     #{url = "about", name = "About", slash = true, blank = false, size="s110"},
+    {url = "baktu", name = "Baktu", slash = true, blank = false, size="s110"},
     {url = "archive", name = "Posts", slash = true, blank = false, size="s110"},
 #    {url = "categories", name = "Categories", slash = true, blank = false, size="s110"},
     {url = "tags", name = "Tags", slash = true, blank = false, size="s110"},

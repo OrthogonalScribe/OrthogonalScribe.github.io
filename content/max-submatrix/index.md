@@ -4,12 +4,12 @@ description = "Combining summed-area tables and another dynamic programming patt
 date = 2023-03-20
 
 [taxonomies]
-tags = ["Algorithms","Dynamic programming","C++"]
+tags = ["Algorithms", "Competitive Programming", "Dynamic programming", "C++"]
 
 [extra]
 math = true
 math_auto_render = true
-keywords = "Algorithms, Dynamic programming, Competitive programming"
+keywords = "Algorithms, Competitive programming, Dynamic programming"
 toc = true
 series = "Algorithms"
 +++

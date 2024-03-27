@@ -2,13 +2,21 @@
     "cSpell.words": [
         "cout",
         "cstdint",
+        "defaultdict",
+        "Eulerian",
         "forall",
+        "Hierholzer",
+        "Hierholzer's",
+        "indegree",
         "iostream",
         "linenos",
         "mathcal",
+        "multiset",
         "NCSS",
+        "outdegree",
         "println",
         "submatrices",
-        "submatrix"
+        "submatrix",
+        "walkccc"
     ]
 }

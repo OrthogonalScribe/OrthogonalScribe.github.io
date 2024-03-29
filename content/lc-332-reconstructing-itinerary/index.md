@@ -85,9 +85,9 @@ The key intuition for reverse post-order traversal merging all the trails approp
 The resulting time and space complexities are $\mathcal{O}(|E| log |E|)$ and $\mathcal{O}(|E|)$, respectively.
 
 
-### C++ translation
+### C++ implementation
 
-Translating the above to C++, we use a min priority queue to do the sorting for us, ending up with:
+Implementing the algorithm in C++, we use a min priority queue to do the sorting for us, ending up with:
 
 ```c++, linenos
 class Solution {

@@ -1,7 +1,7 @@
 +++
 title = "LeetCode 332: Reconstructing Itinerary"
 description = "Using Hierholzer's algorithm to find an Eulerian trail"
-date = 2023-03-27
+date = 2024-03-27
 
 [taxonomies]
 tags = ["Algorithms", "Competitive Programming", "LeetCode", "Graphs", "Backtracking", "C++", "Python"]

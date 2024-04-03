@@ -1,3 +1,16 @@
 /******************************************************************************
  *   Extra - Put your extra SASS/CSS here, it will get bundled with abridge.css
  *****************************************************************************/
+
+// bare-bones diff syntax highlighting
+.z-deleted, .z-from-file {
+  color: var(--cr);
+}
+
+.z-inserted, .z-to-file {
+  color: var(--cg);
+}
+
+.z-range {
+  color: var(--h8); // blue
+}

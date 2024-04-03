@@ -8,7 +8,6 @@ tags = ["Algorithms", "Competitive Programming", "LeetCode", "Graphs", "Backtrac
 
 [extra]
 math = true
-#math_auto_render = true
 keywords = "Algorithms, Competitive programming, Graphs, Hierholzer, Backtracking, C++, Python, LeetCode, Reconstructing Itinerary"
 toc = true
 series = "Algorithms"

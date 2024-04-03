@@ -1,0 +1,73 @@
+Result:
+123456789CC234567892
+A,B,A,C,B,C,B,C,A,C
+L,10,R,12,R,12
+R,6,R,10,L,10
+R,10,L,10,L,12,R,6
+n
+
+Original moves, separated, aligned and fenced off:
+
+AAAAAAAA
+L,10
+    R,12
+    R,12
+AAAAAAAA
+
+BBBBBBBBBBBBBBBB
+        R,6
+            R,10
+L,10
+BBBBBBBBBBBBBBBB
+
+AAAAAAAA
+L,10
+    R,12
+    R,12
+AAAAAAAA
+
+CCCCCCCCCCCCCCCCCCCC
+            R,10
+L,10
+                L,12
+        R,6
+CCCCCCCCCCCCCCCCCCCC
+
+BBBBBBBBBBBBBBBB
+        R,6
+            R,10
+L,10
+BBBBBBBBBBBBBBBB
+
+CCCCCCCCCCCCCCCCCCCC
+            R,10
+L,10
+                L,12
+        R,6
+CCCCCCCCCCCCCCCCCCCC
+
+BBBBBBBBBBBBBBBB
+        R,6
+            R,10
+L,10
+BBBBBBBBBBBBBBBB
+
+CCCCCCCCCCCCCCCCCCCC
+            R,10
+L,10
+                L,12
+        R,6
+CCCCCCCCCCCCCCCCCCCC
+
+AAAAAAAA
+L,10
+    R,12
+    R,12
+AAAAAAAA
+
+CCCCCCCCCCCCCCCCCCCC
+            R,10
+L,10
+                L,12
+        R,6
+CCCCCCCCCCCCCCCCCCCC

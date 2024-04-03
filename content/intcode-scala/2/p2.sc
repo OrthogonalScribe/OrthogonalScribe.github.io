@@ -1,0 +1,24 @@
+#!/usr/bin/env amm2
+
+val t0 = scala.io.Source.stdin.getLines.next.split(',').map{_.toInt}
+
+def isAnswer(nv: (Int, Int)) = {
+  // patch tape
+  val t = Array(t0.head, nv._1, nv._2) ++ (t0 drop 3)
+
+  def run(i: Int): Unit = t.slice(i, i+4) match {
+    case Array( 1,a,b,c ) => t(c) = t(a) + t(b); run(i+4)
+    case Array( 2,a,b,c ) => t(c) = t(a) * t(b); run(i+4)
+    case Array(99,   _* ) => ()  // halt
+  }
+
+  run(0)
+
+  t.head == 19690720
+}
+
+val r = 0 to 99
+val nvs = for (n <- r; v <- r) yield (n, v)
+
+val (n,v) = (nvs find isAnswer).get
+println(100*n + v)

@@ -36,3 +36,8 @@ shortcode
 backport
 ISAs
 implicits
+outdegrees
+loglinear
+codeforces
+mdtable
+heapq

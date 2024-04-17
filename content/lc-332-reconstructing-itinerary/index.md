@@ -231,7 +231,7 @@ The benchmark source code is [benchmark.cpp](./benchmark.cpp):
 
 </details>
 
-`PauseTiming()` and `ResumeTiming()` have a combined overhead of approximately 350 ns in both optimization scenarios. The benchmark is compiled with `gcc (Debian 13.2.0-10) 13.2.0` and `-std=c++20`, in two configurations: with `-O2`, and without any `-O` flags.[^zola_extensionless] . Google Benchmark is provided by `libbenchmark-dev:amd64` version `1.8.3-3` on a Debian Testing machine. Guided by the [documentation](https://google.github.io/benchmark/reducing_variance.html), we disable CPU scaling to reduce result variance. In this particular case, the CPU exhibited significant frequency swings when using the `performance` governor, so its frequency was manually locked via
+`PauseTiming()` and `ResumeTiming()` have a combined overhead of approximately 350 ns in both optimization scenarios. The benchmark is compiled with `gcc (Debian 13.2.0-10) 13.2.0` and `-std=c++20`, in two configurations: with `-O2`, and without any `-O` flags.[^zola_extensionless] Google Benchmark is provided by `libbenchmark-dev:amd64` version `1.8.3-3` on a Debian Testing machine. Guided by the [documentation](https://google.github.io/benchmark/reducing_variance.html), we disable CPU scaling to reduce result variance. In this particular case, the CPU exhibited significant frequency swings when using the `performance` governor, so its frequency was manually locked via
 
 `sudo cpupower frequency-set -f 3000000`[^benchmark_scaling_reporting]
 

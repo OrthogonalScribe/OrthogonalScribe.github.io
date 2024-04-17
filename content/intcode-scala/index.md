@@ -323,7 +323,7 @@ and using a simple [`csplit`](https://www.mankier.com/1/csplit)+ffmpeg script (i
 
 we can visualize the traversal
 
-{{ video(sources=["15/aoc.2019.15.webm"]) }}
+{{ gif(sources=["15/aoc.2019.15.webm"]) }}
 
 ## Day 17: Scaffold traversal
 ### d17p1: find intersections {#d17p1}

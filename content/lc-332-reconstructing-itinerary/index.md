@@ -122,13 +122,13 @@ private:
 ```
 
 
-## Performance
+## Performance tuning
 
 While the above solutions are sufficiently fast to serve as LeetCode submissions, spending a bit of time thinking about performance can be useful for future problems that have some overlap with this one.
 
 The loglinear time complexity stems from us needing to find the lexicographically minimal Eulerian trail. As an aside, in scenarios where any Eulerian trail is acceptable, we can skip the edge or neighbor ordering and achieve $\mathcal{O}(|V| + |E|)$[^tum_complexity].
 
-Looking a bit closer, the precise requirement is to always choose the next lexicographically smallest neighbor to traverse when processing a particular vertex. This gives us the first performance knob we can tweak. Our Python solution achieves that ordered processing by globally sorting all edges in descending order and using lists as stacks, but this is not strictly necessary—we only need per-vertex ordering. Thus, in our C++ solution we use a min priority queue (the same can be done in Python using [heapq](https://docs.python.org/3/library/heapq.html)). While this is still loglinear, the log factor is now the largest outdegree of a vertex in the graph, which can be a notable difference in the general case. Within the constraints of the LeetCode problem, $|E| < 300$ means that the best case scenario (maximum outdegree of 1) might enjoy up to an 8x speedup (of that part of the code specifically) compared to the worst case scenario.
+Looking a bit closer, the precise requirement is to always choose the next lexicographically smallest neighbor to traverse when processing a particular vertex. This gives us the first performance knob we can tweak. Our Python solution achieves that ordered processing by globally sorting all edges in descending order and using lists as stacks, but this is not strictly necessary—we only need per-vertex ordering. Thus, in our C++ solution we use a min priority queue (the same can be done in Python using [heapq](https://docs.python.org/3/library/heapq.html)). While this is still loglinear, the log factor is now the largest outdegree of a vertex in the graph, which can be a notable difference in the general case. Within the constraints of the LeetCode problem, $|E| \le 300$ means that the best case scenario (maximum outdegree of 1) might enjoy up to a 7x speedup (of that part of the code specifically) compared to the worst case scenario.
 
 However, this is ignoring constant factors in both the ordering steps and the rest of the algorithm, as well as data locality and other practical concerns. As usual, it is best to measure to ensure the theoretical improvements translate into real speedups.
 
@@ -140,7 +140,7 @@ We test the following approaches:
 
 * an equivalent of the global sort Python solution,
 * the minimum priority queue C++ solution,
-* a `std::make_heap` version of the above to achieve linear adjacency list initialization per vertex,
+* a `std::make_heap` version of the above for linear (instead of loglinear) adjacency list initialization per vertex,
 * the C++ multiset[^multiset_codeforces] solution from [walkccc.me](https://walkccc.me/LeetCode/problems/332/#__tabbed_1_1),
 * and manually sorting the edges in each adjacency list.
 
@@ -158,7 +158,7 @@ The largest vertex outdegree in these graphs can be expected to decrease with th
 * and with the minimum outdegree count of 1 ($|V| = |E|$).
 
 
-### Results
+### Benchmark results
 
 * As expected, we observe a speedup with bigger graphs with the local ordering approaches, both within the LeetCode constraints (up to 1.6x), and up to 2.4x with $26^3$-edge graphs. However, some of the local ordering approaches are slower than the global sorting one with smaller graphs.
 * We observe a 5-10x speedup across the board when switching from compiling with `-O0` to `-O2`.
@@ -172,14 +172,14 @@ Notably, unless we want to do a manual local sort, the semantically most direct 
 
 #### With `-O0`
 
-Comparative speedups:
+Relative speedups:
 
 {{include_file(path="log/o0.mdtable")}}
 
 <details>
     <summary>Invocation used to generate the table</summary>
 
-`make clean benchmark && sudo cpupower frequency-set -f 3000000 && ./benchmark --benchmark_min_warmup_time=1 --benchmark_repetitions=3 | tee log/o0.txt | grep real_time_median | ./bench2table.sc --base GlobalSort --column Make_heap --column MinPriQ --column LocalSort --column Multiset > log/o0.mdtable ; sudo cpupower frequency-set --governor ondemand`
+`make clean benchmark && sudo cpupower frequency-set -f 3000000 && ./benchmark --benchmark_min_warmup_time=1 --benchmark_repetitions=3 | tee log/o0.txt | grep real_time_mean | ./bench2table.sc --base GlobalSort --column Make_heap --column MinPriQ --column LocalSort --column Multiset > log/o0.mdtable ; sudo cpupower frequency-set --governor ondemand`
 
 </details>
 
@@ -192,14 +192,14 @@ Comparative speedups:
 
 #### With `-O2`
 
-Comparative speedups:
+Relative speedups:
 
 {{include_file(path="log/o2.mdtable")}}
 
 <details>
     <summary>Invocation used to generate the table</summary>
 
-`make clean benchmark OPTFLAGS=-O2 && sudo cpupower frequency-set -f 3000000 && ./benchmark --benchmark_min_warmup_time=1 --benchmark_repetitions=3 | tee log/o2.txt | grep real_time_median | ./bench2table.sc --base GlobalSort --column Make_heap --column Multiset --column MinPriQ --column LocalSort > log/o2.mdtable ; sudo cpupower frequency-set --governor ondemand`
+`make clean benchmark OPTFLAGS=-O2 && sudo cpupower frequency-set -f 3000000 && ./benchmark --benchmark_min_warmup_time=1 --benchmark_repetitions=3 | tee log/o2.txt | grep real_time_mean | ./bench2table.sc --base GlobalSort --column Make_heap --column Multiset --column MinPriQ --column LocalSort > log/o2.mdtable ; sudo cpupower frequency-set --governor ondemand`
 
 </details>
 
@@ -213,7 +213,7 @@ Comparative speedups:
 ### Methods
 
 
-We generate the graphs via [genEulerianGraph.sc](./genEulerianGraph.sc):
+The input graphs are generated via [genEulerianGraph.sc](./genEulerianGraph.sc):
 
 <details>
     <summary>Click to expand</summary>
@@ -231,13 +231,7 @@ The benchmark source code is [benchmark.cpp](./benchmark.cpp):
 
 </details>
 
-`PauseTiming()` and `ResumeTiming()` were measured to have a combined overhead of approximately 350 ns in both optimization scenarios.
-
-We compile the benchmark with `gcc (Debian 13.2.0-10) 13.2.0` and `-std=c++20`, in two configurations: with `-O2`, and without any `-O` flags.[^zola_extensionless]
-
-We use `libbenchmark-dev:amd64` version `1.8.3-3` on a Debian Testing machine.
-
-Guided by the [documentation](https://google.github.io/benchmark/reducing_variance.html), we disable CPU scaling to reduce result variance. In this particular case, the CPU exhibited significant frequency swings when using the `performance` governor, so its frequency was manually locked via
+`PauseTiming()` and `ResumeTiming()` have a combined overhead of approximately 350 ns in both optimization scenarios. The benchmark is compiled with `gcc (Debian 13.2.0-10) 13.2.0` and `-std=c++20`, in two configurations: with `-O2`, and without any `-O` flags.[^zola_extensionless] . Google Benchmark is provided by `libbenchmark-dev:amd64` version `1.8.3-3` on a Debian Testing machine. Guided by the [documentation](https://google.github.io/benchmark/reducing_variance.html), we disable CPU scaling to reduce result variance. In this particular case, the CPU exhibited significant frequency swings when using the `performance` governor, so its frequency was manually locked via
 
 `sudo cpupower frequency-set -f 3000000`[^benchmark_scaling_reporting]
 
@@ -250,7 +244,7 @@ and the current governor can be seen via
 `head /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`[^arch_wiki_cpu_scaling]
 
 
-Finally, we massage the console output[^google_json] via [bench2table.sc](./bench2table.sc):
+Finally, the console output[^google_json] is processed via [bench2table.sc](./bench2table.sc):
 
 <details>
     <summary>Click to expand</summary>

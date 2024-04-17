@@ -2,14 +2,14 @@
 
 case class Stat(name: String, nodeCnt: Int, edgeCnt: Int, wallTimeNs: Int)
 
-@main(doc = """Takes real_time_median rows from a templated multi-repetition
+@main(doc = """Takes real_time_mean rows from a templated multi-repetition
   |Google benchmark console output table as input. Prints markdown table of
   |speedups compared to base.""".stripMargin)
 def printStatsTable(base: String, column: Seq[String]) =
   val cs = column
 
   val stats = scala.io.Source.stdin.getLines.toSeq map {
-    case s"solve<$name>/$nodeCnt/$edgeCnt/real_time_median $wallTime ns $_" =>
+    case s"solve<$name>/$nodeCnt/$edgeCnt/real_time_mean $wallTime ns $_" =>
       Stat(name, nodeCnt.toInt, edgeCnt.toInt, wallTime.trim.toInt) }
 
   println(s"""| Edges | Nodes | $base | ${cs                      mkString " | "} |""")

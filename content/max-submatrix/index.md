@@ -117,7 +117,7 @@ if we define $S_{ij}$ to be $0$ when $(i,j)$ is out of bounds.
 
 ### Widest NzCSS
 
-The lack of negative numbers in the matrix means that growing any contiguous submatrix will not result in a smaller sum of its elements. This means that for a given lower right corner at position $(i,j)$, instead of looking at all possible NzCSSs, we only need to consider the widest one.
+The lack of negative numbers in the input matrix means that growing any contiguous submatrix will not result in a smaller sum of its elements. Further, the constraint of not having any zeroes in the sought contiguous submatrix means the sum will be strictly increasing. This means that for a given lower right corner at position $(i,j)$, instead of looking at all possible NzCSSs, we only need to consider the widest one.
 
 Similarly to the previous section, we can take advantage of the calculations we've already done for previous coordinates to find the widest submatrix in constant time per coordinate. We generate a matrix $D$, such that $D_{ij}$ denotes the dimensions of the widest NzCSS with a lower right corner at $A_{ij}$. This obeys the following recurrence relation:
 
@@ -125,7 +125,7 @@ Similarly to the previous section, we can take advantage of the calculations we'
 $$
 D_{ij} =
     \begin{cases}
-        0                                           & \text{if } A_{ij} = 0                  \\\\
+        0                                           & \text{if } A_{ij} = 0                             \\\\
         1                                           & \text{if } A_{ij} \neq 0 \land (i = 0 \lor j = 0) \\\\
         1 + \min(D_{i-1,j}, D_{i,j-1}, D_{i-1,j-1}) & \text{otherwise}
     \end{cases}

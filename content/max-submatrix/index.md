@@ -66,7 +66,7 @@ Our approach can be roughly divided into three steps:
 
 1. We use a summed-area table to be able to calculate the sum of any contiguous submatrix in $\mathcal{O}(1)$, after a $\mathcal{O}(MN)$ initialization step.
 
-2. We take advantage of the constraint that there are no negative numbers to reduce the problem further: for each element $A_{ij}$, among all square submatrices that have it as a lower right corner, the widest one will have the largest sum. Thus, we can avoid processing all others, and are left with only $M{\times}N$ candidate submatrices to consider for the whole problem.
+2. We take advantage of the constraint that there are no negative numbers to reduce the problem further: for each element $A_{ij}$, among all square submatrices that have it as a lower right corner, the widest one will have the largest sum. Thus, we can avoid processing all others, and are left with only $MN$ candidate submatrices to consider for the whole problem.
 
 3. We use a similar DP approach to find the widest NzCSS with a lower right corner at $(i,j)$ in $\mathcal{O}(1)$, using those found for 3 of its immediate neighbors.
 

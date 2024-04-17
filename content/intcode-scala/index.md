@@ -301,15 +301,29 @@ In part two, we repair the oxygen system, and it starts filling the area. It tak
 
 Our task is to find how long it takes for the entire area to be filled with oxygen.
 
-To solve this, we reuse the maze from part 1 and run another BFS, keeping track of the maximum depth and printing it afterwards. The changes to the part 1 code are to encapsulate the `seen` set in the first BFS, and drop the no longer needed distance variable. We then add a straightforward `bfs2()` BFS implementation that returns the maximum traversal depth, find the location of the oxygen system in the maze and start `bfs2()` from it.
+To solve this, we reuse the maze from part 1 and run another BFS, this time starting from the location of the oxygen system, keeping track of the maximum depth and printing it afterwards. The changes to the part 1 code are to encapsulate the `seen` set in the first BFS, and drop the no longer needed distance variable. We then add a straightforward `bfs2()` BFS implementation that returns the maximum traversal depth, find the location of the oxygen system in the maze and start `bfs2()` from it.
 
-`diff -uw p1.sc p2.sc  | tail +6` shows the changes to part 1,
+`diff -uw p1.sc p2.sc  | tail +6` shows the changes to the code,
 
 {{code_block_of_file(path="15/p1p2.diff", info_string="diff")}}
 
 resulting in the following [code](15/p2.sc) for part two (omitting the unchanged interpreter):
 
 {{code_block_of_file(path="15/p2.sc", info_string="sc, linenos, hide_lines=1-99")}}
+
+### d15viz: visualization {#d15viz}
+
+By dumping the maze state as a [PPM](https://en.wikipedia.org/wiki/Netpbm#PPM_example) image at each BFS invocation ([full code](15/p2.anim.sc))
+
+{{code_block_of_file(path="15/p2anim.diff", info_string="diff")}}
+
+and using a simple [`csplit`](https://www.mankier.com/1/csplit)+ffmpeg script (including some nearest-neighbor upscaling and hardcoded dimensions)
+
+{{code_block_of_file(path="15/mkwebm.sh", info_string="bash, linenos")}}
+
+we can visualize the traversal
+
+{{ video(sources=["15/aoc.2019.15.webm"]) }}
 
 ## Day 17: Scaffold traversal
 ### d17p1: find intersections {#d17p1}

@@ -1,0 +1,60 @@
++  dump1
++
+   if (wave.nonEmpty)
+     bfs1(1+depth, seen, wave.flatMap(genNext).flatten)
+ }
+ bfs1(1, m.Set(pos0), Seq(PosProc(pos0,proc0)))
+ 
++def dump1 = {
++  val rs = maze.keys.map{_.r}
++  val cs = maze.keys.map{_.c}
++  println(s"P3\n${(cs.min to cs.max).size} ${(rs.min to rs.max).size}\n255")
++  for   (r <- rs.min to rs.max) {
++    for (c <- cs.min to cs.max)
++      maze.get(Pos(r,c)) match {
++        case Some(Wall  ) => print("100 0 0 ")
++        case Some(Empty ) => print("100 100 100 ")
++        case Some(Oxygen) => print("178 255 255 ")
++        case None         => print("0 0 0 ")
++      }
++      println
++  }
++}
++
+ // =============================================================
+ // part 2, reuses maze only
+ 
+ @annotation.tailrec
+-def bfs2(depth: Int, seen: m.Set[Pos], wave: Seq[Pos]): Int = {
++def bfs2(depth: Int, seen: m.Set[Pos], wave: Seq[Pos]): Unit = {
+   def isValid(p: Pos) = !seen(p) && maze(p) == Empty
+   val nextWave = wave flatMap {_.neighbors} filter (isValid)
+   seen ++= nextWave
+ 
++  dump2(seen)
++
+   if (nextWave.nonEmpty)
+     bfs2(1+depth, seen, nextWave)
+-  else
+-    depth
+ }
+ 
+ val posOxy = maze.find{_._2==Oxygen}.get._1
+-println(bfs2(0, m.Set(posOxy), Seq(posOxy)))
++bfs2(0, m.Set(posOxy), Seq(posOxy))
++
++def dump2(seen: m.Set[Pos]) = {
++  val rs = maze.keys.map{_.r}
++  val cs = maze.keys.map{_.c}
++  println(s"P3\n${(cs.min to cs.max).size} ${(rs.min to rs.max).size}\n255")
++  for   (r <- rs.min to rs.max) {
++    for (c <- cs.min to cs.max)
++      maze.get(Pos(r,c)) match {
++        case Some(Wall  ) => print("100 50 50 ")
++        case Some(Empty ) => print(if (seen(Pos(r,c))) "100 100 255 " else "100 100 100 ")
++        case Some(Oxygen) => print("178 255 255 ")
++        case None         => print("0 0 0 ")
++      }
++      println
++  }
++}

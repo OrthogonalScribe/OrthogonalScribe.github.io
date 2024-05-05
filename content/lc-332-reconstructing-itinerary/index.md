@@ -186,7 +186,7 @@ Relative speedups:
 <details>
     <summary>Benchmark log</summary>
 
-{{code_block_of_file(path="log/o0.txt", info_string="plain")}}
+{{code_block_of_file(path="log/o0.txt", info_string="txt")}}
 
 </details>
 
@@ -206,7 +206,7 @@ Relative speedups:
 <details>
     <summary>Benchmark log</summary>
 
-{{code_block_of_file(path="log/o2.txt", info_string="plain")}}
+{{code_block_of_file(path="log/o2.txt", info_string="txt")}}
 
 </details>
 

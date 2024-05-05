@@ -419,7 +419,7 @@ The [brute-force solution](19/p1.sc) shown below (omitting the unchanged interpr
 
 ### d19p2: closest square {#d19p2}
 
-In part two, we are to find the 100x100 axis-aligned square closest to the emitter that fits entirely within the tractor beam. We need to submit $10000*P_x + P_y$, where $P$ is the point closest to the emitter within that square.
+In part two, we are to find the 100x100 axis-aligned square closest to the emitter that fits entirely within the tractor beam. We need to submit $10000 P_x + P_y$, where $P$ is the point closest to the emitter within that square.
 
 The implementation scans down the beam until it finds a spot wide enough for our square, and then outputs the result. To do this,
 

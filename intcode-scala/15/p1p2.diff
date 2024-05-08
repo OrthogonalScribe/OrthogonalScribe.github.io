@@ -1,0 +1,55 @@
+ 
++// ====================================================================
++// part 1
++
+ val proc0 = ICP(scala.io.Source.stdin.getLines.next.split(',').map{_.toLong})
+ 
+ import collection.{mutable => m}
+@@ -134,12 +137,9 @@
+ val pos0 = Pos(0,0)
+ val maze = m.Map[Pos,Tile](pos0->Empty)
+ 
+-val seen = m.Set(pos0)
+-
+ case class PosProc(po: Pos, pr: ICP)
+ 
+-var od = 0
+-def bfs(wave: Seq[PosProc], depth: Int): Unit = {
++def bfs1(depth: Int, seen: m.Set[Pos], wave: Seq[PosProc]): Unit = {
+   def genNext(pp: PosProc) =
+     for {
+       n <- pp.po.neighbors
+@@ -153,12 +153,29 @@
+       s match {
+         case NokWall  => maze(n) = Wall              ; None
+         case Ok       => maze(n) = Empty             ; Some(PosProc(n, p1))
+-        case OkOxygen => maze(n) = Oxygen; od = depth; Some(PosProc(n, p1))
++        case OkOxygen => maze(n) = Oxygen; Some(PosProc(n, p1))
+       }
+     }
+ 
+   if (wave.nonEmpty)
+-    bfs(wave.flatMap(genNext).flatten, depth+1)
++    bfs1(1+depth, seen, wave.flatMap(genNext).flatten)
++}
++bfs1(1, m.Set(pos0), Seq(PosProc(pos0,proc0)))
++
++// =============================================================
++// part 2, reuses maze only
++
++@annotation.tailrec
++def bfs2(depth: Int, seen: m.Set[Pos], wave: Seq[Pos]): Int = {
++  def isValid(p: Pos) = !seen(p) && maze(p) == Empty
++  val nextWave = wave flatMap {_.neighbors} filter (isValid)
++  seen ++= nextWave
++
++  if (nextWave.nonEmpty)
++    bfs2(1+depth, seen, nextWave)
++  else
++    depth
+ }
+-bfs(Seq(PosProc(pos0,proc0)),1)
+-println(od)
++
++val posOxy = maze.find{_._2==Oxygen}.get._1
++println(bfs2(0, m.Set(posOxy), Seq(posOxy)))

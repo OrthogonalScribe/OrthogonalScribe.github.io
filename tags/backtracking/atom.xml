@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>OrthogonalScribe - Backtracking</title>
+    <link rel="self" type="application/atom+xml" href="https://orthogonalscribe.github.io/tags/backtracking/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://orthogonalscribe.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-04-17T00:00:00+00:00</updated>
+    <id>https://orthogonalscribe.github.io/tags/backtracking/atom.xml</id>
+    <entry xml:lang="en">
+        <title>LeetCode 332: Reconstructing Itinerary</title>
+        <published>2024-03-27T00:00:00+00:00</published>
+        <updated>2024-04-17T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://orthogonalscribe.github.io/lc-332-reconstructing-itinerary/"/>
+        <id>https://orthogonalscribe.github.io/lc-332-reconstructing-itinerary/</id>
+        
+        <summary type="html">&lt;p&gt;This post explains how &lt;a href=&quot;https:&#x2F;&#x2F;walkccc.me&#x2F;LeetCode&#x2F;problems&#x2F;332&#x2F;&quot;&gt;an implementation of Hierholzer&#x27;s algorithm&lt;&#x2F;a&gt; solves &lt;a href=&quot;https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;reconstruct-itinerary&#x2F;&quot;&gt;LeetCode 332: Reconstructing Itinerary&lt;&#x2F;a&gt; to find an Eulerian trail, and benchmarks the performance of several data structures and algorithms that can be used.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>

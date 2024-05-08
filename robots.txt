@@ -1,0 +1,5 @@
+
+Sitemap: https://orthogonalscribe.github.io/sitemap.xml
+User-Agent: *
+Allow: /
+Host: https://orthogonalscribe.github.io

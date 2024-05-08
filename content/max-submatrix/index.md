@@ -2,6 +2,7 @@
 title = "Maximum nonzero contiguous square submatrix"
 description = "Combining summed-area tables and another dynamic programming pattern to solve a competitive programming problem."
 date = 2024-03-20
+updated = 2024-04-17
 
 [taxonomies]
 tags = ["Algorithms", "Competitive Programming", "Dynamic programming", "C++"]

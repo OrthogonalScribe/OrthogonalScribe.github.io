@@ -2,7 +2,7 @@
 title = "LeetCode 332: Reconstructing Itinerary"
 description = "Using Hierholzer's algorithm to find an Eulerian trail and optimizing its performance"
 date = 2024-03-27
-updated = 2024-04-15
+updated = 2024-04-17
 
 [taxonomies]
 tags = ["Algorithms", "Benchmarking", "Optimization", "Google Benchmark", "LeetCode", "Graphs", "Backtracking", "C++", "Python"]

@@ -2,6 +2,7 @@
 title = "Evolution of a Scala Intcode interpreter"
 description = "A post following the changes to a Scala solution for the Advent of Code 2019 Intcode series of challenges"
 date = 2024-04-03
+updated = 2024-05-08
 
 [taxonomies]
 tags = ["Advent Of Code", "Intcode", "Interpreters", "Scala"]
@@ -209,7 +210,7 @@ We [implement](11/p1.sc) this via a direct translation of the main loop above in
 
 In this part, we find out that there is a single white panel on the hull, and we need to start the robot from there. Our task is to run the program again, but this time we need to submit the 8 letter identifier the robot has painted.
 
-The easiest way to achieve this is to visualize the hull after the program halts, and do manual optical character recognition. To make debugging easier, we reify the colors, moves and robot states into their own types, adjusting the loop to use those. The only other changes are setting the initial hull panel to `White`, and adding a hull visualization loop after the main one, resulting in the following [code](11/p2.sc) (omitting the unchanged interpreter):
+The easiest way to achieve this is to visualize the hull after the program halts, and do *manual* OCR (as it were). To make debugging easier, we reify the colors, moves and robot states into their own types, adjusting the loop to use those. The only other changes are setting the initial hull panel to `White`, and adding a hull visualization loop after the main one, resulting in the following [code](11/p2.sc) (omitting the unchanged interpreter):
 
 {{code_block_of_file(path="11/p2.sc", info_string="sc, linenos, hide_lines=1-90")}}
 
